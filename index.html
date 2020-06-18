@@ -37,7 +37,7 @@
     var paragraphs = {
 
       welcome: ['360 Games', 'A Journey to find the <strong>insto bottle</strong>', 'Here we go'],
-      rules: ["1.  Find the insto bottle <br> 2.  Press and hold left click for moving area <br> 3.  One left click can hide the object, click again to show it <br> 3. Just click on the object <br>"
+      rules: ["1.  Find the insto bottle <br> 2.  Press and hold left click for moving area <br> 3.  One left click can hide the object, click again to show it <br> 4. Just click on the object <br>"
       ],
       // welcome: ['welcome'],
       // rules: ['rules'],
@@ -133,17 +133,40 @@
     viewer.OrbitControls.enabled = false;
     viewer.add(panorama, panorama_area);
 
+    // insto object
     var posterInfospot, posterInfospot_2;
     posterInfospot = new PANOLENS.Infospot(300, './assets/insto.png');
     posterInfospot_2 = new PANOLENS.Infospot(120, './assets/insto-2.png');
-    posterInfospot.addHoverText('Hebat, mata kamu sehat, temukan satu temanku lagi!')
+    posterInfospot_3 = new PANOLENS.Infospot(1000, './assets/insto-3.png');
+
+    posterInfospot.addHoverText('Great, your eyes are good, find again!', 50)
     posterInfospot_2.addHoverElement(document.getElementById('insto-video'), 200);
+    posterInfospot_3.addHoverText('Find my friends!', 70)
 
     posterInfospot.position.set(-4774.9, 474.16, 3400);
     posterInfospot_2.position.set(-3774.9, 1174.16, -2075.02);
+    posterInfospot_3.position.set(4637.61, -1098.12, -3071.24);
 
     panorama.add(posterInfospot);
-    panorama_area.add(posterInfospot, posterInfospot_2);
+    panorama_area.add(posterInfospot, posterInfospot_2, posterInfospot_3);
+
+    // access rule from panel
+    var posterInfospot_4 = new PANOLENS.Infospot(2000, './assets/rules.png');
+    posterInfospot_4.position.set(-4774.9, 474.16, -1375.02);
+    panorama.add(posterInfospot_4);
+
+    var controlItemPoster = {
+      style: {
+        backgroundImage: 'url(./assets/rules-icon.png)',
+        float: 'right',
+        borderRadius: '50%'
+      },
+      onTap: function(){
+        posterInfospot_4.focus();
+      }
+    };
+    viewer.appendControlItem(controlItemPoster);
+
 
   </script>
 
