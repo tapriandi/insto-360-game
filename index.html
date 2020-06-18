@@ -20,6 +20,12 @@
     <div id="typed">Insto Present</div>
   </div>
 
+  <div id="insto-video" style="display: none;">
+    <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY" frameborder="0"></iframe>
+    <div class="title">Tutorial using insto</div>
+    <div class="text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum, consequatur voluptatum iure aut praesentium adipisci doloremque sed a in hic beatae, autem enim? Quisquam deserunt dolores ipsam officiis, nostrum nihil.</div>
+  </div>
+
   <script>
     var panorama, panorama_area, viewer, typed, typed;
     var rulesInfospot, valveInfospot, endingInfospot;
@@ -31,11 +37,11 @@
     var paragraphs = {
 
       // welcome: ['360 Games', 'A Journey to find the <strong>insto bottle</strong>', 'Here we go'],
-      // rules: ['1.  Find the insto bottle imediately <br> 2.  Press and hold the left click for moving <br> 3.  Click <b>insto bottle<b> to collect your point',
+      // rules: ["1.  Find the insto bottle <br> 2.  Press and hold left click for moving area <br> 3.  One left click can hide the object, click again to show it <br> 3. Just click on the object <br>"
       // ],
       welcome: ['welcome'],
       rules: ['rules'],
-      ending: ["let's play!"]
+      ending: ["let's play!", 'press arrow button']
 
     };
 
@@ -103,21 +109,21 @@
     endingInfospot = new PANOLENS.Infospot(10e-7); // Make it not visible
 
     rulesInfospot.position.set(4610.04, 1280.07, 1431.29);
-    valveInfospot.position.set(4637.61, -798.12, -1671.24);
+    valveInfospot.position.set(4637.61, -798.12, -4000);
 
     rulesInfospot.addHoverText('Rules', 50);
 
     // Panorama
     // panorama = new PANOLENS.EmptyPanorama();
-    panorama = new PANOLENS.ImagePanorama('./assets/1.jpg');
-    // panorama_area = new PANOLENS.ImagePanorama('./assets/7.jpg');
-    panorama_area = new PANOLENS.ImagePanorama('./assets/2.jpg');
+    panorama = new PANOLENS.ImagePanorama('./assets/2.jpg');
+    panorama_area = new PANOLENS.ImagePanorama('./assets/1.jpg');
     panorama.addEventListener('progress', onProgress);
     panorama.addEventListener('load', onLoad);
     panorama.addEventListener('enter', onEnter);
     panorama.add(rulesInfospot, valveInfospot, endingInfospot);
-    panorama.link( panorama_area, new THREE.Vector3(4637.61, -798.12, -1071.24) );
-    panorama_area.link( panorama, new THREE.Vector3(4637.61, -798.12, -1071.24) );
+
+    panorama.link( panorama_area, new THREE.Vector3(4637.61, -1098.12, -4000) );
+    panorama_area.link( panorama, new THREE.Vector3(4637.61, -1098.12, -1071.24) );
 
     // Viewer
     viewer = new PANOLENS.Viewer({
@@ -127,12 +133,17 @@
     viewer.OrbitControls.enabled = false;
     viewer.add(panorama, panorama_area);
 
+    var posterInfospot, posterInfospot_2;
+    posterInfospot = new PANOLENS.Infospot(300, './assets/insto.png');
+    posterInfospot_2 = new PANOLENS.Infospot(120, './assets/insto-2.png');
+    posterInfospot.addHoverText('Hebat, mata kamu sehat, temukan satu temanku lagi!')
+    posterInfospot_2.addHoverElement(document.getElementById('insto-video'), 200);
 
-    var posterInfospot = new PANOLENS.Infospot(2000, 'https://images-na.ssl-images-amazon.com/images/I/91nELBuo3kL._RI_SX200_.jpg');
-    posterInfospot.position.set(-4774.9, 474.16, -1375.02);
+    posterInfospot.position.set(-4774.9, 474.16, 3400);
+    posterInfospot_2.position.set(-3774.9, 1174.16, -2075.02);
+
     panorama.add(posterInfospot);
-    panorama_area.add(posterInfospot);
-    
+    panorama_area.add(posterInfospot, posterInfospot_2);
 
   </script>
 

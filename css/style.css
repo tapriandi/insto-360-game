@@ -52,3 +52,30 @@ a:visited {
 #progress.finish {
   opacity: 0;
 }
+
+#insto-video {
+  max-width: 500px;
+  max-height: 500px;
+  min-width: 200px;
+  min-height: 250px;
+  background: #fff;
+  color: #000;
+  border-radius: 3px;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+#insto-video > iframe {
+  border: none;
+  width:100%;
+}
+
+.title {
+  font-size: 1.5em;
+  text-align: center;
+  padding: 5px;
+}
+
+.text {
+  padding: 0 20px 20px 20px;
+}
