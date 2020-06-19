@@ -24,12 +24,12 @@ a:visited {
 #typed {
   color: #fff;
   text-shadow: 0px 0px 2px #000;
-  font-size: 24pt;
+  font-size: 20pt;
 }
 
 #dialog {
   position: absolute;
-  top: 50%;
+  top: 40%;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -54,16 +54,27 @@ a:visited {
 }
 
 #insto-video {
-  max-width: 500px;
-  max-height: 500px;
-  min-width: 200px;
-  min-height: 250px;
+  max-width: 600px;
+  max-height: 600px;
   background: #fff;
   color: #000;
   border-radius: 3px;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
 }
+/* #insto-video {
+  max-width: 500px;
+  max-height: 350px;
+  background: #fff;
+  color: #000;
+  border-radius: 3px;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+} */
+/* #insto-video > video {
+  border: none;
+  width:100%;
+} */
 
 #insto-video > iframe {
   border: none;
@@ -71,11 +82,11 @@ a:visited {
 }
 
 .title {
-  font-size: 1.5em;
+  font-size: 1.2em;
   text-align: center;
   padding: 5px;
 }
 
-.text {
+/* .text {
   padding: 0 20px 20px 20px;
-}
+} */

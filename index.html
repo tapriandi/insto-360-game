@@ -10,6 +10,7 @@
 </head>
 
 <body>
+  <script src="./js/jquery.min.js"></script>
   <script src="./js/three.min.js"></script>
   <script src="./js/panolens.min.js"></script>
   <script src="./js/typed.min.js"></script>
@@ -21,9 +22,9 @@
   </div>
 
   <div id="insto-video" style="display: none;">
+    <!-- <video src="./assets/insto-video.mp4"></video> -->
     <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY" frameborder="0"></iframe>
-    <div class="title">Tutorial using insto</div>
-    <div class="text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum, consequatur voluptatum iure aut praesentium adipisci doloremque sed a in hic beatae, autem enim? Quisquam deserunt dolores ipsam officiis, nostrum nihil.</div>
+    <!-- <div class="title">congratulation!</div> -->
   </div>
 
   <script>
@@ -35,14 +36,12 @@
       typeSpeed = 50;
 
     var paragraphs = {
-
       welcome: ['360 Games', 'A Journey to find the <strong>insto bottle</strong>', 'Here we go'],
       rules: ["1.  Find the insto bottle <br> 2.  Press and hold left click for moving area <br> 3.  One left click can hide the object, click again to show it <br> 4. Just click on the object <br>"
       ],
       // welcome: ['welcome'],
       // rules: ['rules'],
       ending: ["let's play!", 'press arrow button']
-
     };
 
     // Patch for typed.js of cutting back-to-back words
@@ -108,8 +107,8 @@
     valveInfospot = new PANOLENS.Infospot();
     endingInfospot = new PANOLENS.Infospot(10e-7); // Make it not visible
 
-    rulesInfospot.position.set(4610.04, 1280.07, 1431.29);
-    valveInfospot.position.set(4637.61, -798.12, -4000);
+    rulesInfospot.position.set(4610.04, 1000, 1431.29);
+    valveInfospot.position.set(4637.61, -400, -4000);
 
     rulesInfospot.addHoverText('Rules', 50);
 
@@ -122,7 +121,7 @@
     panorama.addEventListener('enter', onEnter);
     panorama.add(rulesInfospot, valveInfospot, endingInfospot);
 
-    panorama.link( panorama_area, new THREE.Vector3(4637.61, -1098.12, -4000) );
+    panorama.link( panorama_area, new THREE.Vector3(4637.61, 250, -4000) );
     panorama_area.link( panorama, new THREE.Vector3(4637.61, -1098.12, -1071.24) );
 
     // Viewer
@@ -136,19 +135,26 @@
     // insto object
     var posterInfospot, posterInfospot_2;
     posterInfospot = new PANOLENS.Infospot(300, './assets/insto.png');
-    posterInfospot_2 = new PANOLENS.Infospot(120, './assets/insto-2.png');
+    posterInfospot_2 = new PANOLENS.Infospot(130, './assets/insto-2.png');
     posterInfospot_3 = new PANOLENS.Infospot(1000, './assets/insto-3.png');
 
-    posterInfospot.addHoverText('Great, your eyes are good, find again!', 50)
+    posterInfospot.addHoverText('Great, your eyes are good, find me again!', 50)
     posterInfospot_2.addHoverElement(document.getElementById('insto-video'), 200);
-    posterInfospot_3.addHoverText('Find my friends!', 70)
+    posterInfospot_3.addHoverText('Pleas, Find my friends!', 70)
 
     posterInfospot.position.set(-4774.9, 474.16, 3400);
-    posterInfospot_2.position.set(-3774.9, 1174.16, -2075.02);
+    posterInfospot_2.position.set(-3774.9, 1300, -2200);
     posterInfospot_3.position.set(4637.61, -1098.12, -3071.24);
 
     panorama.add(posterInfospot);
     panorama_area.add(posterInfospot, posterInfospot_2, posterInfospot_3);
+
+    // posterInfospot_2.addEventListener('click', function() {
+    //   $('#insto-video > video').removeClass('hidden');
+    //   $('#insto-video > video').get(0).play();
+    // });
+    // posterInfospot_2.show();
+    // posterInfospot_2.focus();
 
     // access rule from panel
     var posterInfospot_4 = new PANOLENS.Infospot(2000, './assets/rules.png');
@@ -167,7 +173,6 @@
     };
     viewer.appendControlItem(controlItemPoster);
 
-
   </script>
 
   <div class="panolens-container">
@@ -175,7 +180,6 @@
     <div class="panolens-infospot">Rules</div>
     <div class="panolens-infospot">Play</div>
   </div>
-
 
 </body>
 
