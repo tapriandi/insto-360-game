@@ -28,7 +28,7 @@
   </div>
 
   <script>
-    var panorama, panorama_1, panorama_2, panorama_3, viewer, typed, typed;
+    var panorama_1, panorama_2, panorama_3, panorama_4, viewer, typed, typed;
     var rulesInfospot, valveInfospot, endingInfospot;
     var progressElement = document.querySelector('#progress');
     var tweeningDelay = 300,
@@ -115,70 +115,51 @@
 
     // Panorama
     // panorama = new PANOLENS.EmptyPanorama();
-    panorama = new PANOLENS.ImagePanorama('./assets/1.jpeg');
-    panorama_1 = new PANOLENS.ImagePanorama('./assets/2.jpeg');
-    panorama_2 = new PANOLENS.ImagePanorama('./assets/3.jpeg');
+    panorama_1 = new PANOLENS.ImagePanorama('./assets/1.jpeg');
+    panorama_2 = new PANOLENS.ImagePanorama('./assets/2.jpeg');
+    panorama_3 = new PANOLENS.ImagePanorama('./assets/3.jpeg');
+    panorama_4 = new PANOLENS.ImagePanorama('./assets/4.jpeg');
     // panorama_3 = new PANOLENS.ImagePanorama('./assets/1.jpg');
-    panorama.addEventListener('progress', onProgress);
-    panorama.addEventListener('load', onLoad);
-    panorama.addEventListener('enter', onEnter);
-    panorama.add(rulesInfospot, valveInfospot, endingInfospot);
+    panorama_1.addEventListener('progress', onProgress);
+    panorama_1.addEventListener('load', onLoad);
+    panorama_1.addEventListener('enter', onEnter);
+    panorama_1.add(rulesInfospot, valveInfospot, endingInfospot);
 
-    panorama.link( panorama_1, new THREE.Vector3(4637, 250, -4000) );
-    panorama_1.link( panorama, new THREE.Vector3(4637, -1098, -1071) );
-    panorama_1.link( panorama_2, new THREE.Vector3(4637, -598, -1071) );
-    panorama_2.link( panorama_1, new THREE.Vector3(4637, -598, -1071) );
-    // panorama_3.link( panorama, new THREE.Vector3(4637, -1098, -1071) );
+    panorama_1.link( panorama_2, new THREE.Vector3(4637, 250, -4000), 300, './assets/next.png' );
+    panorama_2.link( panorama_1, new THREE.Vector3(4637, -1098, -1071), 300, './assets/back.png' );
+
+    panorama_2.link( panorama_3, new THREE.Vector3(4637, -598, -1071) );
+    panorama_3.link( panorama_2, new THREE.Vector3(4637, -598, -1071) );
+    
+    panorama_3.link( panorama_4, new THREE.Vector3(4637, -598, -571) );
+    panorama_4.link( panorama_3, new THREE.Vector3(4637, -598, -571) );
 
     // Viewer
     viewer = new PANOLENS.Viewer({
-      controlBar: false,
+      controlBar: true,
       initialLookAt: new THREE.Vector3(0, 0, 5000)
     });
     viewer.OrbitControls.enabled = false;
-    viewer.add(panorama, panorama_1);
+    viewer.add(panorama_1, panorama_2, panorama_3, panorama_4);
 
     // insto object
-    var posterInfospot, posterInfospot_2;
-    posterInfospot = new PANOLENS.Infospot(300, './assets/insto.png');
-    posterInfospot_2 = new PANOLENS.Infospot(130, './assets/insto-2.png');
-    posterInfospot_3 = new PANOLENS.Infospot(1000, './assets/insto-3.png');
+    var posterInfospot_1, posterInfospot_2, posterInfospot_3, posterInfospot_4;
+    posterInfospot_1 = new PANOLENS.Infospot(300, './assets/insto.png');
+    posterInfospot_2 = new PANOLENS.Infospot(300, './assets/insto-2.png');
+    // posterInfospot_3 = new PANOLENS.Infospot(1000, './assets/insto-3.png');
+    posterInfospot_4 = new PANOLENS.Infospot(2000, './assets/rules.png');
 
-    posterInfospot.addHoverText('Great, your eyes are good, find me again!', 50)
+    posterInfospot_1.addHoverText('Great, your eyes are good, find me again!', 50)
     posterInfospot_2.addHoverElement(document.getElementById('insto-video'), 200);
-    posterInfospot_3.addHoverText('Please, Find our friends!', 70)
+    // posterInfospot_3.addHoverText('Please, Find our friends!', 70);
 
-    posterInfospot.position.set(-4774.9, 474.16, 3400);
+    posterInfospot_1.position.set(-4774.9, 474.16, 3400);
     posterInfospot_2.position.set(-3774.9, 1300, -2200);
     posterInfospot_3.position.set(4637.61, -1098.12, -3071.24);
-
-    panorama.add(posterInfospot);
-    panorama_1.add(posterInfospot, posterInfospot_2, posterInfospot_3);
-
-    // posterInfospot_2.addEventListener('click', function() {
-    //   $('#insto-video > video').removeClass('hidden');
-    //   $('#insto-video > video').get(0).play();
-    // });
-    // posterInfospot_2.show();
-    // posterInfospot_2.focus();
-
-    // access rule from panel
-    var posterInfospot_4 = new PANOLENS.Infospot(2000, './assets/rules.png');
     posterInfospot_4.position.set(-4774.9, 474.16, -1375.02);
-    panorama.add(posterInfospot_4);
 
-    var controlItemPoster = {
-      style: {
-        backgroundImage: 'url(./assets/rules-icon.png)',
-        float: 'right',
-        borderRadius: '50%'
-      },
-      onTap: function(){
-        posterInfospot_4.focus();
-      }
-    };
-    viewer.appendControlItem(controlItemPoster);
-
+    panorama_1.add(posterInfospot_1, posterInfospot_4);
+    panorama_3.add(posterInfospot_1, posterInfospot_2, posterInfospot_3);
   </script>
 
   <div class="panolens-container">
