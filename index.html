@@ -28,7 +28,7 @@
   </div>
 
   <script>
-    var panorama, panorama_area, viewer, typed, typed;
+    var panorama, panorama_1, panorama_2, panorama_3, viewer, typed, typed;
     var rulesInfospot, valveInfospot, endingInfospot;
     var progressElement = document.querySelector('#progress');
     var tweeningDelay = 300,
@@ -36,12 +36,13 @@
       typeSpeed = 50;
 
     var paragraphs = {
-      welcome: ['360 Games', 'A Journey to find the <strong>insto bottle</strong>', 'Here we go'],
-      rules: ["1.  Find the insto bottle <br> 2.  Press and hold left click for moving area <br> 3.  One left click can hide the object, click again to show it <br> 4. Just click on the object <br>"
-      ],
-      // welcome: ['welcome'],
-      // rules: ['rules'],
-      ending: ["let's play!", 'press arrow button']
+      // welcome: ['360 Games', 'A Journey to find the <strong>insto bottle</strong>', 'Here we go'],
+      // rules: ["1.  Find the insto bottle <br> 2.  Press and hold left click for moving area <br> 3.  One left click can hide the object, click again to show it <br> 4. Just click on the object <br>"
+      // ],
+      // ending: ["let's play!", 'press arrow button']
+      welcome: ['welcome'],
+      rules: ['rules'],
+      ending: ['ending']
     };
 
     // Patch for typed.js of cutting back-to-back words
@@ -114,15 +115,20 @@
 
     // Panorama
     // panorama = new PANOLENS.EmptyPanorama();
-    panorama = new PANOLENS.ImagePanorama('./assets/2.jpg');
-    panorama_area = new PANOLENS.ImagePanorama('./assets/1.jpg');
+    panorama = new PANOLENS.ImagePanorama('./assets/1.jpeg');
+    panorama_1 = new PANOLENS.ImagePanorama('./assets/2.jpeg');
+    panorama_2 = new PANOLENS.ImagePanorama('./assets/3.jpeg');
+    // panorama_3 = new PANOLENS.ImagePanorama('./assets/1.jpg');
     panorama.addEventListener('progress', onProgress);
     panorama.addEventListener('load', onLoad);
     panorama.addEventListener('enter', onEnter);
     panorama.add(rulesInfospot, valveInfospot, endingInfospot);
 
-    panorama.link( panorama_area, new THREE.Vector3(4637.61, 250, -4000) );
-    panorama_area.link( panorama, new THREE.Vector3(4637.61, -1098.12, -1071.24) );
+    panorama.link( panorama_1, new THREE.Vector3(4637, 250, -4000) );
+    panorama_1.link( panorama, new THREE.Vector3(4637, -1098, -1071) );
+    panorama_1.link( panorama_2, new THREE.Vector3(4637, -598, -1071) );
+    panorama_2.link( panorama_1, new THREE.Vector3(4637, -598, -1071) );
+    // panorama_3.link( panorama, new THREE.Vector3(4637, -1098, -1071) );
 
     // Viewer
     viewer = new PANOLENS.Viewer({
@@ -130,7 +136,7 @@
       initialLookAt: new THREE.Vector3(0, 0, 5000)
     });
     viewer.OrbitControls.enabled = false;
-    viewer.add(panorama, panorama_area);
+    viewer.add(panorama, panorama_1);
 
     // insto object
     var posterInfospot, posterInfospot_2;
@@ -147,7 +153,7 @@
     posterInfospot_3.position.set(4637.61, -1098.12, -3071.24);
 
     panorama.add(posterInfospot);
-    panorama_area.add(posterInfospot, posterInfospot_2, posterInfospot_3);
+    panorama_1.add(posterInfospot, posterInfospot_2, posterInfospot_3);
 
     // posterInfospot_2.addEventListener('click', function() {
     //   $('#insto-video > video').removeClass('hidden');
