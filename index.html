@@ -27,6 +27,10 @@
     <!-- <div class="title">congratulation!</div> -->
   </div>
 
+  <div id="rules">
+    <img src="./assets/rules.png" alt="">
+  </div>
+
   <script>
     var panorama_1, panorama_2, panorama_3, panorama_4, viewer, typed, typed;
     var rulesInfospot, valveInfospot, endingInfospot;
@@ -75,14 +79,14 @@
     }
 
     function onWelcomeComplete() {
-      delayExecute(rulesInfospot.focus.bind(rulesInfospot), tweeningDelay);
-      type(paragraphs.rules, onRulesTourComplete);
-    }
-
-    function onRulesTourComplete() {
       delayExecute(valveInfospot.focus.bind(valveInfospot), tweeningDelay);
       type(paragraphs.ending, onTopboxTourComplete);
     }
+
+    // function onRulesTourComplete() {
+    //   delayExecute(valveInfospot.focus.bind(valveInfospot), tweeningDelay);
+    //   type(paragraphs.ending, onTopboxTourComplete);
+    // }
 
     function onTopboxTourComplete() {
       delayExecute(endingInfospot.focus.bind(endingInfospot), tweeningDelay);
@@ -108,10 +112,11 @@
     valveInfospot = new PANOLENS.Infospot();
     endingInfospot = new PANOLENS.Infospot(10e-7); // Make it not visible
 
-    rulesInfospot.position.set(4610.04, 1000, 1431.29);
-    valveInfospot.position.set(4637.61, -400, -4000);
+    rulesInfospot.position.set(4610, 1000, 1431.29);
+    valveInfospot.position.set(5500, 100, -4000);
 
-    rulesInfospot.addHoverText('Rules', 50);
+    // rulesInfospot.addHoverText('Rules', 50);
+    valveInfospot.addHoverElement(document.getElementById('rules'), 220);
 
     // Panorama
     // panorama = new PANOLENS.EmptyPanorama();
@@ -125,14 +130,15 @@
     panorama_1.addEventListener('enter', onEnter);
     panorama_1.add(rulesInfospot, valveInfospot, endingInfospot);
 
-    panorama_1.link( panorama_2, new THREE.Vector3(4637, 250, -4000), 300, './assets/next.png' );
-    panorama_2.link( panorama_1, new THREE.Vector3(4637, -1098, -1071), 300, './assets/back.png' );
+    panorama_1.link( panorama_2, new THREE.Vector3(5500, -500, -4000), 300, './assets/next_1.png' );
 
-    panorama_2.link( panorama_3, new THREE.Vector3(4637, -598, -1071) );
-    panorama_3.link( panorama_2, new THREE.Vector3(4637, -598, -1071) );
-    
-    panorama_3.link( panorama_4, new THREE.Vector3(4637, -598, -571) );
-    panorama_4.link( panorama_3, new THREE.Vector3(4637, -598, -571) );
+    panorama_2.link( panorama_1, new THREE.Vector3(5200, 0, -4000), 300, './assets/back_1.png' );
+    panorama_2.link( panorama_3, new THREE.Vector3(4500, 0, -5000), 300, './assets/next_2.png');
+
+    panorama_3.link( panorama_2, new THREE.Vector3(6000, 0, -4000), 300, './assets/back_2.png');
+    panorama_3.link( panorama_4, new THREE.Vector3(5000, 0, -5000), 300, './assets/next_3.png');
+
+    panorama_4.link( panorama_3, new THREE.Vector3(5000, 0, -4000), 300, './assets/back_3.png');
 
     // Viewer
     viewer = new PANOLENS.Viewer({
